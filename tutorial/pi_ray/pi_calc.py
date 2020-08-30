@@ -2,7 +2,7 @@
 import math, statistics, random, time, sys, locale
 import ray
 import numpy as np
-
+import argparse
 
 ############################### Main ##############################################
 repeat=10  # We'll do this many calculations for a given N and average the results.
@@ -10,7 +10,8 @@ repeat=10  # We'll do this many calculations for a given N and average the resul
 def main():
     global repeat
 
-    import argparse
+    Ns = [500, 1000, 5000, 10000, 50000, 100000]
+
     parser = argparse.ArgumentParser(description="Monte Carlo Pi Calculator")
     parser.add_argument('Ns', metavar='N', type=int, default=Ns, nargs='*', help='Runs with the specified number of samples')
     parser.add_argument('-r', '--repeat', metavar='M', type=int, default=repeat, nargs='?', help='Repeat for each N, then compute average, stdev, etc')
