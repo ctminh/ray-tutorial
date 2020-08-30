@@ -4,9 +4,12 @@ import ray
 import numpy as np
 import argparse
 
-############################### Main ##############################################
+
+
 repeat=10  # We'll do this many calculations for a given N and average the results.
 
+
+############################### Define Main ##############################################
 def main():
     global repeat
 
@@ -25,3 +28,8 @@ def main():
             Run locally?    {args.local}
             """)
     repeat = args.repeat
+
+
+############################### Execute Main ##############################################
+if __name__ == '__main__':
+    main()
