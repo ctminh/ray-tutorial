@@ -79,7 +79,7 @@ def compute_pi_loop(N):
     return [approx_pi for approx_pi, inside_count, total_count, xys_in, xys_out in values]
 
 def compute_pi_for(Ns, compute_pi_loop):
-    result_fmt = '~pi = {:8.6f} (stddev = {7.6f}, error = {:7.6f}%), duration = {:9.5f} seconds'
+    result_fmt = '~pi = {:8.6f} (stddev = {:7.6f}, error = {:7.6f}%), duration = {:9.5f} seconds'
     ns = []
     means = []
     stddevs = []
