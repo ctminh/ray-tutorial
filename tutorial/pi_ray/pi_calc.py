@@ -26,7 +26,7 @@ def compute_pi_for(Ns, compute_pi_loop):
     durations = []
     for N in Ns:
         ns.append(N)
-        print(f'# samples = {str_large_n(N)}: ', end='', flush=True)
+        print(f'# samples = {str_large_n(N)}: ', end='\n', flush=True)
         start = time.time()
     
     return ns, means, stddevs, errors, durations
