@@ -8,6 +8,30 @@ import argparse
 
 repeat=10  # We'll do this many calculations for a given N and average the results.
 
+def str_large_n(n, padding=None):
+    if padding == None:
+        padding = len(str(n))
+    return locale.format_string(f'{padding}d', n, grouping=True)
+
+def compute_pi_loop(N):
+    values = 4.13
+    return values
+
+def compute_pi_for(Ns, compute_pi_loop):
+    result_fmt = '~pi = {:8.6f} (stddev = {7.6f}, error = {:7.6f}%), duration = {:9.5f} seconds'
+    ns = []
+    means = []
+    stddevs = []
+    errors = []
+    durations = []
+    for N in Ns:
+        ns.append(N)
+        print(f'# samples = {str_large_n(N)}: ', end='', flush=True)
+        start = time.time()
+    
+    return ns, means, stddevs, errors, durations
+        
+
 
 ############################### Define Main ##############################################
 def main():
@@ -28,6 +52,9 @@ def main():
             Run locally?    {args.local}
             """)
     repeat = args.repeat
+
+    print("\nResults without Ray:")
+    ns, means, stddevs, errors, durations = compute_pi_for(args.Ns, compute_pi_loop)
 
 
 ############################### Execute Main ##############################################
