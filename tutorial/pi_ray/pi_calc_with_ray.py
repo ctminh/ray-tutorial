@@ -9,11 +9,6 @@ trials = 20
 
 ray.init(ignore_reinit_error=True)
 
-def str_large_n(n, padding=None):
-    if padding == None:
-        padding = len(str(n))
-    return locale.format_string(f'{padding}d', n, grouping=True)
-
 def estimate_pi(num_samples):
     xs = np.random.uniform(low=-1.0, high=1.0, size=num_samples)
     ys = np.random.uniform(low=-1.0, high=1.0, size=num_samples)
@@ -39,5 +34,5 @@ def try_it(n, trials):
     print(fmt.format(duration, approx_pi, stdev, error))   # str_large_n imported above.
     return trials, n, duration, approx_pi, stdev, error
 
-data_ns = [try_it(n, trials) for n in Ns]
-data_trials = [try_it(maxN, trials) for trials in range(5,20,2)]
+# data_ns = [try_it(n, trials) for n in Ns]
+# data_trials = [try_it(maxN, trials) for trials in range(5,20,2)]
