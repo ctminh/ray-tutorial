@@ -34,7 +34,5 @@ def try_it(n, trials):
     print(fmt.format(duration, approx_pi, stdev, error))   # str_large_n imported above.
     return trials, n, duration, approx_pi, stdev, error
 
-for n in Ns:
-    print('n = {:d}, trials = {:d}'.format(n, trials))
-    data_trials = try_it(n, trials)
-# data_trials = [try_it(maxN, trials) for trials in range(5,20,2)]
+
+data_ns = [try_it(n, trials) for n in Ns]
