@@ -10,14 +10,13 @@ trials = 20
 ray.init(ignore_reinit_error=True)
 
 def estimate_pi(num_samples):
-    xs = np.random.uniform(low=-1.0, high=1.0, size=num_samples)
-    ys = np.random.uniform(low=-1.0, high=1.0, size=num_samples)
-    xys = np.stack((xs, ys), axis=-1)
-    inside = xs*xs + ys*ys <= 1.0
-    xys_inside = xys[inside]
-    in_circle = xys_inside
-    approx_pi = 4.0 * in_circle / num_samples
-    print(approx_pi)
+    xs = np.random.uniform(low=-1.0, high=1.0, size=num_samples)   # Generate num_samples random samples for the x coordinate.
+    ys = np.random.uniform(low=-1.0, high=1.0, size=num_samples)   # Generate num_samples random samples for the y coordinate.
+    xys = np.stack((xs, ys), axis=-1)                              # Like Python's "zip(a,b)"; creates np.array([(x1,y1), (x2,y2), ...]).
+    inside = xs*xs + ys*ys <= 1.0                                  # Creates a predicate over all the array elements.
+    xys_inside = xys[inside]                                       # Selects only those "zipped" array elements inside the circle.
+    in_circle = xys_inside.shape[0]                                # Return the number of elements inside the circle.
+    approx_pi = 4.0*in_circle/num_samples                          # The Pi estimate.
     return approx_pi
 
 Ns = [10000, 50000, 100000, 500000, 1000000] #, 5000000, 10000000]  # Larger values take a long time on small VMs and machines!
