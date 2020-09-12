@@ -1,6 +1,7 @@
 import numpy as np
 import math, statistics, time
 import ray
+from pi_calc.py import str_large_n
 
 num_workers = 4
 trials = 20
