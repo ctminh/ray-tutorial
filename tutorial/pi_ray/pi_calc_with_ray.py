@@ -27,10 +27,11 @@ def try_it(n, trials):
     print('trials = {:3d}, N = {:s}: '.format(trials, str_large_n(n, padding=12)), end='')   # str_large_n imported above.
     start = time.time()
     pis = [estimate_pi(n) for _ in range(trials)]
+    print(pis)
     approx_pi = statistics.mean(pis)
     stdev = statistics.stdev(pis)
     duration = time.time() - start
-    error = (100.0*abs(approx_pi-np.pi)/np.pi)
+    error = (100.0*abs(approx_pi - np.pi) / np.pi)
     print(fmt.format(duration, approx_pi, stdev, error))   # str_large_n imported above.
     return trials, n, duration, approx_pi, stdev, error
 
