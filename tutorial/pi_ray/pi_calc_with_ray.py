@@ -35,5 +35,6 @@ def try_it(n, trials):
     return trials, n, duration, approx_pi, stdev, error
 
 for n in Ns:
-    data_trials, n, duration, approx_pi, stdev, error = try_it(n, trials)
+    print('n = {:d}, trials = {:d}'.format(n, trials))
+    data_trials = try_it(n, trials)
 # data_trials = [try_it(maxN, trials) for trials in range(5,20,2)]
