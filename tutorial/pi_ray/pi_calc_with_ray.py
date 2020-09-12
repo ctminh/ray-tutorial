@@ -17,6 +17,7 @@ def estimate_pi(num_samples):
     xys_inside = xys[inside]
     in_circle = xys_inside
     approx_pi = 4.0 * in_circle / num_samples
+    print(approx_pi)
     return approx_pi
 
 Ns = [10000, 50000, 100000, 500000, 1000000] #, 5000000, 10000000]  # Larger values take a long time on small VMs and machines!
@@ -27,7 +28,6 @@ def try_it(n, trials):
     print('trials = {:3d}, N = {:s}: '.format(trials, str_large_n(n, padding=12)), end='')   # str_large_n imported above.
     start = time.time()
     pis = [estimate_pi(n) for _ in range(trials)]
-    print(pis)
     approx_pi = statistics.mean(pis)
     stdev = statistics.stdev(pis)
     duration = time.time() - start
