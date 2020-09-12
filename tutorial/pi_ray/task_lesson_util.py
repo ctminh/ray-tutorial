@@ -7,8 +7,7 @@ import time
 import holoviews as hv
 from holoviews import opts
 from holoviews.streams import Counter, Tap
-from bokeh.util import square_circle_plot, two_lines_plot, means_stddevs_plot
-
+# from bokeh.util import square_circle_plot, two_lines_plot, means_stddevs_plot
 hv.extension('bokeh')
 
 from bokeh.layouts import gridplot, layout
