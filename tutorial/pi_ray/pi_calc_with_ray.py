@@ -1,12 +1,16 @@
 import numpy as np
 import math, statistics, time
 import ray
-from pi_calc.py import str_large_n
 
 num_workers = 4
 trials = 20
 
 ray.init(ignore_reinit_error=True)
+
+def str_large_n(n, padding=None):
+    if padding == None:
+        padding = len(str(n))
+    return locale.format_string(f'{padding}d', n, grouping=True)
 
 def estimate_pi(num_samples):
     xs = np.random.uniform(low=-1.0, high=1.0, size=num_samples)
