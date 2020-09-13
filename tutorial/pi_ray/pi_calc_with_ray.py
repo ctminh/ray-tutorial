@@ -7,7 +7,13 @@ from task_lesson_util import make_dmaps, run_simulations, stop_simulations
 num_workers = 4
 trials = 20
 
+# init ray and init some values
 ray.init(ignore_reinit_error=True)
+Ns = [10000, 50000, 100000, 500000, 1000000] #, 5000000, 10000000]  # Larger values take a long time on small VMs and machines!
+maxN = Ns[-1]
+# the statement format for printing results
+fmt = '{:10.5f} seconds: pi ~ {:7.6f}, stddev = {:5.4f}, error = {:5.4f}%'
+
 
 def estimate_pi(num_samples):
     xs = np.random.uniform(low=-1.0, high=1.0, size=num_samples)   # Generate num_samples random samples for the x coordinate.
@@ -19,10 +25,11 @@ def estimate_pi(num_samples):
     approx_pi = 4.0*in_circle/num_samples                          # The Pi estimate.
     return approx_pi
 
-Ns = [10000, 50000, 100000, 500000, 1000000] #, 5000000, 10000000]  # Larger values take a long time on small VMs and machines!
-maxN = Ns[-1]
+# create as a ray task
+@ray.remote
+def ray_estimate_pi(num_samples):
+    return estimate_pi(num_samples)
 
-fmt = '{:10.5f} seconds: pi ~ {:7.6f}, stddev = {:5.4f}, error = {:5.4f}%'
 def try_it(n, trials):
     print('trials = {:3d}, N = {:s}: '.format(trials, str_large_n(n, padding=12)), end='')   # str_large_n imported above.
     start = time.time()
@@ -34,5 +41,22 @@ def try_it(n, trials):
     print(fmt.format(duration, approx_pi, stdev, error))   # str_large_n imported above.
     return trials, n, duration, approx_pi, stdev, error
 
+def ray_try_it(n, trials):
+    print('trials = {:3d}, N = {:s}: '.format(trials, str_large_n(n, padding=12)), end='')   # str_large_n imported above.
+    start = time.time()
+    refs = [ray_estimate_pi.remote(n) for _ in range(trials)]
+    pis = ray.get(refs)
+    approx_pi = statistics.mean(pis)
+    stdev = statistics.stdev(pis)
+    duration = time.time() - start
+    error = (100.0*abs(approx_pi-np.pi)/np.pi)
+    print(fmt.format(duration, approx_pi, stdev, error))   # str_large_n imported above.
+    return trials, n, duration, approx_pi, stdev, error
 
-data_ns = [try_it(n, trials) for n in Ns]
+############## Main flow of the program ###################
+# normal computation
+# data_ns = [try_it(n, trials) for n in Ns]
+
+# computing with ray
+refs = [ray_estimate_pi.remote(n) for n in [100, 1000, 10000]]
+print(ray.get(refs))
