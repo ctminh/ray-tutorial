@@ -58,5 +58,5 @@ def ray_try_it(n, trials):
 # data_ns = [try_it(n, trials) for n in Ns]
 
 # computing with ray
-refs = [ray_estimate_pi.remote(n) for n in [100, 1000, 10000]]
+refs = [ray_estimate_pi.remote(n) for n in [500, 1000, 5000, 10000, 50000, 100000]]
 print(ray.get(refs))
