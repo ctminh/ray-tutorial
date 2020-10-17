@@ -58,5 +58,16 @@ def ray_try_it(n, trials):
 # data_ns = [try_it(n, trials) for n in Ns]
 
 # computing with ray
-refs = [ray_estimate_pi.remote(n) for n in [500, 1000, 5000, 10000, 50000, 100000]]
-print(ray.get(refs))
+# refs = [ray_estimate_pi.remote(n) for n in [500, 1000, 5000, 10000, 50000, 100000]]
+# print(ray.get(refs))
+
+data_ns = [try_it(n, trials) for n in Ns]
+data_trials = [try_it(maxN, trials) for trials in range(5,20,2)]
+
+ray_data_ns = [ray_try_it(n, trials) for n in Ns]
+ray_data_trials = [ray_try_it(maxN, trials) for trials in range(5,20,2)]
+
+np_data_ns         = np.array(data_ns)
+np_data_trials     = np.array(data_trials)
+np_ray_data_ns     = np.array(ray_data_ns)
+np_ray_data_trials = np.array(ray_data_trials)
