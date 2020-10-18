@@ -3,17 +3,18 @@ import numpy as np
 import pandas as pd
 import ray
 
+# libs/deps for measureing time and plotting graphs
 import time
 import holoviews as hv
 from holoviews import opts
 from holoviews.streams import Counter, Tap
-# from bokeh.util import square_circle_plot, two_lines_plot, means_stddevs_plot
+from bokeh.util import square_circle_plot, two_lines_plot, means_stddevs_plot
 hv.extension('bokeh')
-
 from bokeh.layouts import gridplot, layout
 from bokeh.models import Slider, Button
 from bokeh.plotting import figure, output_file, show
 
+# normal progs without Ray
 from pi_calc import MonteCarloPi, compute_pi_for
 
 
@@ -127,7 +128,6 @@ def stop_simulations(dmaps):
     [dmap.periodic.stop() for dmap in dmaps]
 
 if __name__ == '__main__':
-
     dmaps = make_dmaps(DEFAULT_NS)
     show(dmaps[0] + dmaps[1] + dmaps[2])
     run_simulations(dmaps)

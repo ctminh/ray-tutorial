@@ -5,7 +5,6 @@ import numpy as np
 import argparse
 
 
-
 repeat=10  # We'll do this many calculations for a given N and average the results.
 
 def estimate_pi(num_samples, return_points=False):
