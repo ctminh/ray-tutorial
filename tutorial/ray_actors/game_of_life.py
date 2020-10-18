@@ -18,15 +18,13 @@ class Game:
 
 class State:
     """
-    Represents a grid of game cells.
-    For simplicity, require square grids.
+    Represents a grid of game cells. For simplicity, require square grids.
     Each instance is considered immutable.
     """
     def __init__(self, grid = None, size = 10):
         """
         Create a State. Specify either a grid of cells or a size, for which a size x size
-        grid will be computed with random values.
-        (For simplicity, we only use square grids.)
+        grid will be computed with random values. (For simplicity, we only use square grids.)
         """
         if type(grid) != type(None): # avoid annoying AttributeError
             assert grid.shape[0] == grid.shape[1]
@@ -40,8 +38,7 @@ class State:
     def living_cells(self):
         """
         Returns ([x1, x2, ...], [y1, y2, ...], [z1, z2, ...]) for all living cells,
-        where z is the number of generations the cell has lived.
-        Simplifies graphing.
+        where z is the number of generations the cell has lived. Simplifies graphing.
         """
         cells = [(i,j,self.grid[i][j]) for i in range(self.size) for j in range(self.size) if self.grid[i][j] != 0]
         return zip(*cells)
@@ -67,8 +64,7 @@ class ConwaysRules:
     def step(self, state):
         """
         Apply the rules to a state and return a new state.
-        Determine the next values for all the cells, based on the current
-        state. Creates a new State with the changes.
+        Determine the next values for all the cells, based on the current state. Creates a new State with the changes.
         """
         new_grid = state.grid.copy()
         for i in range(state.size):
