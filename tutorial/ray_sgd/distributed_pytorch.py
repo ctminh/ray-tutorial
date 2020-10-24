@@ -47,9 +47,9 @@ ray.init()
 trainer = TorchTrainer(
     training_operator_cls=MyTrainingOperator,
     scheduler_step_freq="epoch",  # if scheduler is used
-    config={"lr": 0.001, "batch_size": 64}
-    # num_workers=100,
-    # use_gpu=True
+    config={"lr": 0.001, "batch_size": 64},
+    num_workers=100,
+    use_gpu=True
     )
 
 for i in range(10):
